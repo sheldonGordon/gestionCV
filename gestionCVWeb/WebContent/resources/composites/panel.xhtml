@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+	
+	<composite:interface>
+		<composite:attribute name="id" type="java.lang.String"/>
+		<composite:attribute name="titre" type="java.lang.String"/>
+		<composite:attribute name="rendered" type="boolean"/>
+	</composite:interface>
+	
+	<composite:implementation>
+		<c:if test="#{cc.attrs.rendered}">
+			<div data-role="panel" id="#{cc.attrs.id}" class="panel">
+				<c:if test="#{cc.attrs.titre ne null}">
+					<h4>
+						#{cc.attrs.titre}
+					</h4>
+					<hr style="margin: 10px 0;background-color:black; width: 35%;"/>
+				</c:if>
+				<composite:insertChildren />
+			</div>
+		</c:if>
+	</composite:implementation>
+</html>

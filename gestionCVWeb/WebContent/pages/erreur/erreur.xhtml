@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<h:html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+	<title>Erreur</title>
+	<h:outputStylesheet name="style.css" library="css" />
+	<h:outputStylesheet name="metro-all.css" library="css" />
+</h:head>
+
+<h:body styleClass="bg-dark fg-white">
+	<!-- SCRIPTS -->
+	<h:outputScript library="js" name="jquery-3.3.1.js"/>
+	<h:outputScript library="js" name="metro.min.js"/>	
+	<h:outputScript library="js" name="erreurCube.js"/>
+	
+	<div class="container">
+        <div style="text-align:center;margin-top: 25px;">
+				<div>
+					<span style="font-size: 5em; display: inline; margin-left: 50px;">Oups !</span>
+				</div>
+				
+				<div>Une erreur s'est produite et votre requête n'a pu aboutir.</div>
+			</div>
+
+        <div class="mt-6" id="cube" data-role="cube" data-custom="customCube" data-cells="10" data-margin="3" data-color="bg-dark bg-black"
+        	data-flash-color="#004d6f"></div>
+        
+        <div style="text-align:center;margin-top: 25px;">
+			<a href="/sphynxWeb/index.xhtml?faces-redirect=true" class="button bg-brandColor2 fg-white">Retourner à la page d'acceuil</a>
+		</div>
+    </div>    
+</h:body>
+</h:html>

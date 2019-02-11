@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+
+<composite:interface>
+	<composite:attribute name="permission" type="java.lang.String"
+		required="true" />
+</composite:interface>
+
+
+<composite:implementation>
+	#{compteUtilisateurSessionBean.checkPermission(cc.attrs.permission)}
+</composite:implementation>
+
+</html>
