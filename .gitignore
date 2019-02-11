@@ -1,0 +1,23 @@
+# Configuration de Eclipse
+.metadata/**
+RemoteSystemsTempFiles/**
+**/.settings/**
+**/.project
+**/.classpath
+# Fichiers compilés
+**/build/**
+**/bin/**
+# Configuration Glassfish/Payara
+**/META-INF/glassfish-ejb-jar.xml
+**/WEB-INF/glassfish-web.xml
+# Fichiers backup
+**.jsfdia
+**.bkp
+# Inconnu ???
+**/.tern-project
+**/.recommenders/**
+**/.directory
+
+\.gitmodules
+/.metadata/
+/.recommenders/
