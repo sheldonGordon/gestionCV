@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd">
+	<description>Mapping relationnel des entités</description>
+
+	<package>appli.gestionCV.entities</package>
+
+	<mapped-superclass class="appli.gestionCV.entities.AbstractEntity">
+		<attributes>
+			<id name="id">
+				<column name="id" nullable="false" length="36" />
+			</id>
+		</attributes>
+	</mapped-superclass>
+	
+	<entity class="appli.gestionCV.entities.Compte" name="Compte">
+		<table name="compte" />	
+		<named-query name="COMPTE.logOn">
+			<query>
+				<![CDATA[
+					SELECT c
+					FROM Compte c
+					WHERE c.login = :login
+					AND c.password = :password
+				]]>
+			</query>
+		</named-query>		
+		<attributes>
+			<basic name="login">
+				<column name="login" unique="true"/>
+			</basic>
+			<basic name="password">
+				<column name="password"/>
+			</basic>
+		</attributes>
+	</entity>
+</entity-mappings>
