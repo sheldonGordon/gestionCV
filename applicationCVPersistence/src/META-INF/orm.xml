@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd">
+	<description>Mapping relationnel des entités</description>
+
+	<package>appli.gestionCV.entities</package>
+
+	<mapped-superclass class="appli.gestionCV.entities.AbstractEntity">
+		<attributes>
+			<id name="id">
+				<column name="id" nullable="false" length="36" />
+			</id>
+		</attributes>
+	</mapped-superclass>
+	
+	<entity class="appli.gestionCV.entities.Compte" name="Compte">
+		<table name="compte" />			
+		
+		<attributes>
+			<basic name="login">
+				<column name="login" unique="true"/>
+			</basic>
+			<basic name="password">
+				<column name="password"/>
+			</basic>
+			<many-to-many name="listeRole" >
+				<join-table >
+					<join-column name="compte_id" referenced-column-name="id" />
+					<inverse-join-column name="role_id" referenced-column-name="id" />
+				</join-table>
+			</many-to-many>
+		</attributes>
+	</entity>
+	
+	<entity class="appli.gestionCV.entities.Role" name="Role">
+		<table name="role" />
+		<attributes>
+			<basic name="libelle">
+				<column name="libelle" />
+			</basic>
+			<basic name="description">
+				<column name="description" />
+			</basic>
+			<many-to-many name="listePermission" >
+				<join-table>
+					<join-column name="role_id" referenced-column-name="id" />
+					<inverse-join-column name="permission_id" referenced-column-name="id" />
+				</join-table>
+			</many-to-many>
+		</attributes>
+	</entity>
+
+	<entity class="appli.gestionCV.entities.Permission" name="Permission">
+		<table name="permission" />		
+		<attributes>
+			<basic name="libelle">
+				<column name="libelle" />
+			</basic>
+			<basic name="description">
+				<column name="description" />
+			</basic>
+		</attributes>
+	</entity>
+
+	<entity class="appli.gestionCV.entities.Mention" name="Mention">
+		<table name="mention" />		
+		<attributes>
+			<basic name="libelle">
+				<column name="libelle" />
+			</basic>
+		</attributes>
+	</entity>
+
+	<entity class="appli.gestionCV.entities.Pays" name="Pays">
+		<table name="pays" />		
+		<attributes>
+			<basic name="nom">
+				<column name="nom" />
+			</basic>
+		</attributes>
+	</entity>
+	
+	<entity class="appli.gestionCV.entities.Diplome" name="diplome">
+		<table name="diplome" />
+		<inheritance strategy="JOINED" />
+		<discriminator-column name="type_diplome" />
+		<attributes>
+			<basic name="etablissement">
+				<column name="etablissement" />
+			</basic>
+			<basic name="libelle">
+				<column name="libelle" />
+			</basic>
+			<basic name="dateDebut">
+				<column name="date_debut" />
+			</basic>
+			<basic name="dateFin">
+				<column name="date_fin" />
+			</basic>
+		</attributes>
+	</entity>
+	
+	<entity class="appli.gestionCV.entities.Certification" name="Certification">
+		<table name="certification" />		
+		<attributes>
+			<basic name="reference">
+				<column name="reference" />
+			</basic>
+		</attributes>
+	</entity>
+	
+	<entity class="appli.gestionCV.entities.Formation" name="Formation">
+		<table name="formation" />		
+		<attributes>
+			<basic name="ville">
+				<column name="ville" />
+			</basic>
+			<basic name="obtention">
+				<column name="obtention" />
+			</basic>
+			<many-to-one name="mention">
+				<join-column name="mention" />
+			</many-to-one>
+			<many-to-one name="pays">
+				<join-column name="pays" />
+			</many-to-one>
+		</attributes>
+	</entity>
+	
+	<entity class="appli.gestionCV.entities.Sport" name="Sport">
+		<table name="formation" />		
+		<attributes>
+			<basic name="libelle">
+				<column name="libelle" />
+			</basic>
+		</attributes>
+	</entity>
+	
+	<entity class="appli.gestionCV.entities.CentreInteret" name="CentreInteret">
+		<table name="centre_interet" />		
+		<attributes>
+			<basic name="libelle">
+				<column name="libelle" />
+			</basic>
+		</attributes>
+	</entity>
+	
+	<entity class="appli.gestionCV.entities.Personne" name="Personne">
+		<table name="personne" />		
+		<attributes>
+			<basic name="libelle">
+				<column name="libelle" />
+			</basic>
+			<basic name="nom">
+				<column name="nom" />
+			</basic>
+			<basic name="prenom">
+				<column name="prenom" />
+			</basic>
+			<basic name="adresse">
+				<column name="adresse" />
+			</basic>
+			<basic name="telFixe">
+				<column name="telFixe" />
+			</basic>
+			<basic name="telMobile">
+				<column name="telMobile" />
+			</basic>
+			<basic name="mail">
+				<column name="mail" />
+			</basic>
+			<basic name="info">
+				<column name="info" />
+			</basic>
+			<many-to-one name="compte">
+				<join-column name="compte" />
+			</many-to-one>
+			<many-to-one name="pays">
+				<join-column name="pays" />
+			</many-to-one>
+		</attributes>
+	</entity>
+	
+	<entity class="appli.gestionCV.entities.Fonction" name="Fonction">
+		<table name="fonction" />		
+		<attributes>
+			<basic name="libelle">
+				<column name="libelle" />
+			</basic>
+		</attributes>
+	</entity>
+	
+	<entity class="appli.gestionCV.entities.Competence" name="Competence">
+		<table name="competence" />		
+		<attributes>
+			<basic name="libelle">
+				<column name="libelle" />
+			</basic>
+			<basic name="pourcentageMaitrise">
+				<column name="pourcentage_maitrise" />
+			</basic>
+		</attributes>
+	</entity>
+	
+	<entity class="appli.gestionCV.entities.Experience" name="Experience">
+		<table name="experience" />		
+		<attributes>
+			<basic name="libelle">
+				<column name="libelle" />
+			</basic>
+			<basic name="entreprise">
+				<column name="entreprise" />
+			</basic>
+			<basic name="poste">
+				<column name="poste" />
+			</basic>
+			<basic name="dateDebut">
+				<column name="date_debut" />
+			</basic>
+			<basic name="dateFin">
+				<column name="date_fin" />
+			</basic>
+			<basic name="descriptionPoste">
+				<column name="description_poste" />
+			</basic>
+			<many-to-many name="listeFonction">
+				<join-table>
+					<join-column name="experience_id" referenced-column-name="id"/>
+					<inverse-join-column name="fonction_id" referenced-column-name="id"/>
+				</join-table>
+			</many-to-many>
+		</attributes>
+	</entity>
+	
+	<entity class="appli.gestionCV.entities.Curriculum" name="Curriculum">
+		<table name="curriculum" />		
+		<attributes>
+			<basic name="libelle">
+				<column name="libelle" />
+			</basic>
+			<basic name="photo">
+				<column name="photo" />
+			</basic>
+			<basic name="titre">
+				<column name="titre" />
+			</basic>
+			<many-to-one name="personne">
+				<join-column name="personne" />
+			</many-to-one>
+			<many-to-many name="listeFormation" fetch="LAZY">
+				<join-table>
+					<join-column name="cv_id" referenced-column-name="id"/>
+					<inverse-join-column name="formation_id" referenced-column-name="id"/>
+				</join-table>
+			</many-to-many>
+			<many-to-many name="listeExperience" fetch="LAZY">
+				<join-table>
+					<join-column name="cv_id" referenced-column-name="id"/>
+					<inverse-join-column name="experience_id" referenced-column-name="id"/>
+				</join-table>
+			</many-to-many>
+			<many-to-many name="listeCertification" fetch="LAZY">
+				<join-table>
+					<join-column name="cv_id" referenced-column-name="id"/>
+					<inverse-join-column name="certification_id" referenced-column-name="id"/>
+				</join-table>
+			</many-to-many>
+			<many-to-many name="listeCompetence" fetch="LAZY">
+				<join-table>
+					<join-column name="cv_id" referenced-column-name="id"/>
+					<inverse-join-column name="competence_id" referenced-column-name="id"/>
+				</join-table>
+			</many-to-many>
+			<many-to-many name="listeSport" fetch="LAZY">
+				<join-table>
+					<join-column name="cv_id" referenced-column-name="id"/>
+					<inverse-join-column name="sport_id" referenced-column-name="id"/>
+				</join-table>
+			</many-to-many>
+			<many-to-many name="listeCentreInteret" fetch="LAZY">
+				<join-table>
+					<join-column name="cv_id" referenced-column-name="id"/>
+					<inverse-join-column name="centreInteret_id" referenced-column-name="id"/>
+				</join-table>
+			</many-to-many>
+		</attributes>
+	</entity>
+	
+	<converter class="appli.gestionCV.converters.DateConverter" auto-apply="true" />
+</entity-mappings>

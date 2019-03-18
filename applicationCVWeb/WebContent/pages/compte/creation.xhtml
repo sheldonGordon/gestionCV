@@ -1,0 +1,17 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/WEB-INF/templates/template.xhtml">
+
+	<ui:define name="titre">Creation d'un compte</ui:define>
+	<ui:define name="contenu">		
+		<h:form prependId="false">
+			<h:outputText value="Login" />
+			<h:inputText value="" />	
+			<h:outputText value="Mot de passe" />
+			<h:inputSecret value="" />		
+		</h:form>
+	</ui:define>
+</ui:composition>
