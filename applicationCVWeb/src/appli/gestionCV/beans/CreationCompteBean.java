@@ -14,8 +14,10 @@ import javax.inject.Named;
 import javax.servlet.http.HttpServletResponse;
 
 import appli.gestionCV.entities.Compte;
+import appli.gestionCV.entities.Personne;
 import appli.gestionCV.entities.Role;
 import appli.gestionCV.facades.CompteFacade;
+import appli.gestionCV.facades.PersonneFacade;
 import appli.gestionCV.facades.RoleFacade;
 import appli.gestionCV.sessionBeans.SessionBean;
 import lombok.Getter;
@@ -30,9 +32,22 @@ public class CreationCompteBean implements Serializable{
 	@Getter
 	@Setter
 	private Compte compte;
+	
+	@Getter
+	@Setter
+	private Personne personne;
+
+	@Getter
+	private String confirmationMdp;
+	
+	@Getter
+	private String mdp;
 
 	@Inject
 	private CompteFacade compteFacade;
+	
+	@Inject
+	private PersonneFacade personneFacade;
 	
 	@Inject
 	private RoleFacade roleFacade;
@@ -46,6 +61,7 @@ public class CreationCompteBean implements Serializable{
 			redirectionModification();
 		}else {
 			compte = compteFacade.newInstance();
+			personne = personneFacade.newInstance();
 		}		
 	}
 	
@@ -57,7 +73,20 @@ public class CreationCompteBean implements Serializable{
 		
 		compte.setListeRole(roles);
 		
+		if(confirmationMdp.equals(mdp)) {
+			compte.setPassword(mdp);
+		}else {
+			String message = "Les mots de passe ne sont pas identiques.";
+			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+			return;
+		}
+		
 		compteFacade.create(compte);
+		
+		personne.setCompte(compte);
+		
+		personneFacade.create(personne);
 		
 		redirectionLogin();				
 	}
@@ -83,5 +112,13 @@ public class CreationCompteBean implements Serializable{
 			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
 			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 		}
+	}
+
+	public void setConfirmationMdp(String pass) {
+		this.confirmationMdp = compteFacade.getSHA512(pass);
+	}
+	
+	public void setMdp(String pass) {
+		this.mdp = compteFacade.getSHA512(pass);
 	}
 }

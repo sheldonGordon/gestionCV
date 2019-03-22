@@ -6,12 +6,33 @@
 	template="/WEB-INF/templates/template.xhtml">
 
 	<ui:define name="titre">Creation d'un compte</ui:define>
-	<ui:define name="contenu">		
-		<h:form prependId="false">
-			<h:outputText value="Login" />
-			<h:inputText value="" />	
+	<ui:define name="contenu">	
+		<h:messages />	
+		<h:form prependId="false" class="container">
+			<div class="form-group">				
+				<h:outputText value="Login" />
+				<h:inputText value="#{creationCompteBean.compte.login}" />
+			</div>
 			<h:outputText value="Mot de passe" />
-			<h:inputSecret value="" />		
+			<h:inputSecret value="#{creationCompteBean.mdp}" />		
+			<h:outputText value="Confirmation Mot de passe" />
+			<h:inputSecret value="#{creationCompteBean.confirmationMdp}" />		
+			
+			<h:outputText value="Nom" />
+			<h:inputText value="#{creationCompteBean.personne.nom}" />	
+			<h:outputText value="Prenom" />
+			<h:inputText value="#{creationCompteBean.personne.prenom}" />	
+			<h:outputText value="Adresse" />
+			<h:inputText value="#{creationCompteBean.personne.adresse}" />	
+			<h:outputText value="Téléphone fixe" />
+			<h:inputText value="#{creationCompteBean.personne.telFixe}" />	
+			<h:outputText value="Téléphone mobile" />
+			<h:inputText value="#{creationCompteBean.personne.telMobile}" />
+			<h:outputText value="E-mail" />
+			<h:inputText value="#{creationCompteBean.personne.mail}" pt:type="email"/>
+			<h:outputText value="Information complémentaire" />
+			<h:inputTextarea value="#{creationCompteBean.personne.info}" />	
+			<h:commandButton action="#{creationCompteBean.creation()}" value="Créer" />
 		</h:form>
 	</ui:define>
 </ui:composition>
